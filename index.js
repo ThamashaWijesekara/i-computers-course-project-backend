@@ -1,8 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import Student from './models/student.js'//methna .js dnn oni agata
+//methna .js dnn oni agata
 import User from './models/user.js'
-import studentRouter from './routes/studentRouter.js'
 import userRouter from './routes/userRouter.js'
 import productRouter from './routes/productRouter.js'
 import jwt from 'jsonwebtoken'
@@ -27,6 +26,5 @@ app.listen(3000, ()=>{
     console.log("Server is running!")
 })
 
-app.use("/students", studentRouter)
 app.use("/users",userRouter)
 app.use("/products",userAuthenticate,productRouter)
