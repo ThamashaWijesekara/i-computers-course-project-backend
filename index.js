@@ -1,0 +1,32 @@
+import express from 'express'
+import mongoose from 'mongoose'
+import Student from './models/student.js'//methna .js dnn oni agata
+import User from './models/user.js'
+import studentRouter from './routes/studentRouter.js'
+import userRouter from './routes/userRouter.js'
+import productRouter from './routes/productRouter.js'
+import jwt from 'jsonwebtoken'
+import { userAuthenticate } from './middlwares/authentication.js'
+
+const connectionString = "mongodb+srv://Admin:thamaz123@cluster0.nievrno.mongodb.net/?appName=Cluster0"
+
+//meka promise ekak
+mongoose.connect(connectionString).then(()=>{
+    console.log("MongoDB Connected!")
+})
+
+const app = express()
+
+app.use(express.json())//meken thm req body wl thyn JSON read krgnne undefined wenne nthuw
+
+////Authentication
+//app.use(userAuthenticate)//mehem thibbm login wen ekth ekkm okkom protected wenw
+//one thnta withrk dnn e nis
+
+app.listen(3000, ()=>{
+    console.log("Server is running!")
+})
+
+app.use("/students", studentRouter)
+app.use("/users",userRouter)
+app.use("/products",userAuthenticate,productRouter)
