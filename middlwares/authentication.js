@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config()
 
 export function userAuthenticate(req,res,next){
 
@@ -14,7 +16,7 @@ export function userAuthenticate(req,res,next){
         const token = header.replace("Bearer ", "")
 
         //methn krnne token ek decode krn eka
-        jwt.verify(token, "jwtkey@123",(err, decoded)=>{
+        jwt.verify(token, process.env.JWT_SECRET,(err, decoded)=>{
             if(decoded == null){
                 res.status(401).json({
                     message: "Unauthorized"

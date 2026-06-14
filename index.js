@@ -6,8 +6,10 @@ import userRouter from './routes/userRouter.js'
 import productRouter from './routes/productRouter.js'
 import jwt from 'jsonwebtoken'
 import { userAuthenticate } from './middlwares/authentication.js'
+import dotenv from "dotenv"
+dotenv.config()
 
-const connectionString = "mongodb+srv://Admin:thamaz123@cluster0.nievrno.mongodb.net/?appName=Cluster0"
+const connectionString = process.env.MONGO_URL
 
 //meka promise ekak
 mongoose.connect(connectionString).then(()=>{
